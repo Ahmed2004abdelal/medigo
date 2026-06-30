@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         locale: Locale("en"),
         supportedLocales: [Locale('en'), Locale('ar')],

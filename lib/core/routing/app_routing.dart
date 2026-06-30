@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medigo/features/auth/login/ui/login_screen.dart';
+import 'package:medigo/features/onboarding/logic/cubit/onboarding_cubit.dart';
 import 'package:medigo/l10n/app_localizations.dart';
 import 'package:medigo/splash_screen.dart';
+
+import '../../features/onboarding/ui/onboarding_screen.dart';
 
 class AppRouting {
   AppRouting._();
@@ -11,6 +15,13 @@ class AppRouting {
     switch (settings.name) {
       case '/':
         return CupertinoPageRoute(builder: (_) => const SplashScreen());
+      case '/onboarding':
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider<OnboardingCubit>(
+            create: (context) => OnboardingCubit(),
+            child: OnboardingScreen(),
+          ),
+        );
       case '/login':
         return CupertinoPageRoute(builder: (_) => const LoginScreen());
       case '/signup':
