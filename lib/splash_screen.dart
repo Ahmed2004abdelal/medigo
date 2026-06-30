@@ -15,11 +15,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   Future<void> navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
     // ignore: use_build_context_synchronously
-    context.pushNamedAndRemoveUntil(Routes.login, predicate: (route) => false);
+    context.pushNamedAndRemoveUntil(
+      Routes.onboarding,
+      predicate: (route) => false,
+    );
   }
 
   @override
@@ -28,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen> {
     navigateToNextScreen();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

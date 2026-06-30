@@ -3,29 +3,9 @@ import 'package:medigo/core/constants/assets.dart';
 import 'model/bottom_navigation_model.dart';
 import 'model/feel_model.dart';
 import 'model/filter_model.dart';
-import 'model/onboarding_model.dart';
 import 'model/speciality_model.dart';
 
-List<OnboardingModel> onboardingItems = [
-  OnboardingModel(
-    title: "Your Health, Our Priority",
-    description:
-        "We look after the well-being of your entire family. Find the right doctor and book an appointment with complete peace of mind",
-    image: Assets.imagesOnboard1,
-  ),
-  OnboardingModel(
-    title: "Take Care of Your Loved Ones",
-    description:
-        "From pediatrics to general medicine and beyond, manage your whole family's health simply, quickly, and securely.",
-    image: Assets.imagesOnboard2,
-  ),
-  OnboardingModel(
-    title: "Your Family Health Partner",
-    description:
-        "Because your family's health is precious, we put the best healthcare professionals within your reach.",
-    image: Assets.imagesOnboard3,
-  ),
-];
+
 
 List<SpecialityModel> specialityItems = [
   SpecialityModel(
@@ -141,7 +121,7 @@ List<BottomNavigationModel> bottomNavigationItems = [
   BottomNavigationModel(
     id: 1,
     icon: Assets.imagesIconesHome,
-    page: Container(color: Colors.amber,),
+    page: Container(color: Colors.amber),
   ),
   BottomNavigationModel(
     id: 2,
