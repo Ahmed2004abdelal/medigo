@@ -1,0 +1,4 @@
+class Paths{
+  Paths._();
+  
+}

@@ -1,54 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:medigo/core/constants/assets.dart';
+import 'package:medigo/features/appointment/ui/appointment_screen.dart';
+import 'package:medigo/features/home/ui/screens/home_screen.dart';
+// import 'package:medigo/features/liked/appointment/ui/appointment_screen.dart';
+import 'package:medigo/features/liked/ui/liked_screen.dart';
+import 'package:medigo/features/profile/ui/profile_screen.dart';
+import '../core/constants/assets.dart';
 import 'model/bottom_navigation_model.dart';
 import 'model/feel_model.dart';
 import 'model/filter_model.dart';
-import 'model/speciality_model.dart';
-
-
-
-List<SpecialityModel> specialityItems = [
-  SpecialityModel(
-    id: "0",
-    title: "Dentist",
-    image: Assets.imagesSpecialityDentist,
-  ),
-  SpecialityModel(
-    id: "1",
-    title: "Ophthalmologist",
-    image: Assets.imagesSpecialityOphthalmologist,
-  ),
-  SpecialityModel(
-    id: "2",
-    title: "ENT Specialist",
-    image: Assets.imagesSpecialityEntSpecialist,
-  ),
-  SpecialityModel(
-    id: "3",
-    title: "Otologist",
-    image: Assets.imagesSpecialityOtologist,
-  ),
-  SpecialityModel(
-    id: "4",
-    title: "Gynecologist",
-    image: Assets.imagesSpecialityGynecologist,
-  ),
-  SpecialityModel(
-    id: "5",
-    title: "Cardiologist",
-    image: Assets.imagesSpecialityCardiologist,
-  ),
-  SpecialityModel(
-    id: "6",
-    title: "Gastroenterologist",
-    image: Assets.imagesSpecialityGastroenterologist,
-  ),
-  SpecialityModel(
-    id: "7",
-    title: "Neurologist",
-    image: Assets.imagesSpecialityNeurologist,
-  ),
-];
 
 List<FilterModel> availabilityFilters = [
   FilterModel(
@@ -121,22 +79,22 @@ List<BottomNavigationModel> bottomNavigationItems = [
   BottomNavigationModel(
     id: 1,
     icon: Assets.imagesIconesHome,
-    page: Container(color: Colors.amber),
+    page: HomeScreen(),
   ),
   BottomNavigationModel(
     id: 2,
     icon: Assets.imagesIconesHeartFilled,
-    page: Container(color: Colors.red),
+    page: LikedScreen(),
   ),
   BottomNavigationModel(
     id: 3,
     icon: Assets.imagesIconesCalendar,
-    page: Container(color: Colors.blue),
+    page: AppointmentScreen(),
   ),
   BottomNavigationModel(
     id: 4,
     icon: Assets.imagesIconesUser,
-    page: Container(color: Colors.brown),
+    page: ProfileScreen(),
   ),
 ];
 
@@ -168,3 +126,6 @@ List<FeelModel> fees = [
     value: "video_call",
   ),
 ];
+
+
+

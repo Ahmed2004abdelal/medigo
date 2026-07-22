@@ -98,11 +98,179 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// No description provided for @defaultScreen.
+  /// No description provided for @goAheadSetUpYourAccount.
   ///
   /// In en, this message translates to:
-  /// **'back'**
-  String get defaultScreen;
+  /// **'Go ahead & set up your account'**
+  String get goAheadSetUpYourAccount;
+
+  /// No description provided for @welcomeBackPleaseSignInToManageYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back! Please sign in to manage your account.'**
+  String get welcomeBackPleaseSignInToManageYourAccount;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get forgotPassword;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @orContinueWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Or continue with'**
+  String get orContinueWith;
+
+  /// No description provided for @dontHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t have an account?'**
+  String get dontHaveAnAccount;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @createYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get createYourAccount;
+
+  /// No description provided for @signUpToManageYourAccountEffortlessly.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up to manage your account effortlessly.'**
+  String get signUpToManageYourAccountEffortlessly;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @user.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get user;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phoneNumber;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get registerButton;
+
+  /// No description provided for @alreadyHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAnAccount;
+
+  /// No description provided for @pleaseFillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'please Fill All Fields.'**
+  String get pleaseFillAllFields;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @checkyouremailtoverification.
+  ///
+  /// In en, this message translates to:
+  /// **'check your E-mail to verification'**
+  String get checkyouremailtoverification;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @openemail.
+  ///
+  /// In en, this message translates to:
+  /// **'open email'**
+  String get openemail;
+
+  /// No description provided for @noemailapp.
+  ///
+  /// In en, this message translates to:
+  /// **'No Email App'**
+  String get noemailapp;
+
+  /// No description provided for @seeall.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get seeall;
+
+  /// No description provided for @doctorspecialties.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Specialties'**
+  String get doctorspecialties;
+
+  /// No description provided for @populardoctors.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular Doctors'**
+  String get populardoctors;
+
+  /// No description provided for @availabledoctors.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Doctors'**
+  String get availabledoctors;
+
+  /// No description provided for @findtherightdoctorforyou.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the right doctor for you'**
+  String get findtherightdoctorforyou;
+
+  /// No description provided for @goodmorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Morning'**
+  String get goodmorning;
 
   /// No description provided for @hello.
   ///
