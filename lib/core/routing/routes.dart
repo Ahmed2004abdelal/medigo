@@ -12,4 +12,6 @@ class Routes{
   static const String profile = '/profile';
   static const String liked = '/liked';
   static const String appointment = '/appointment';
+  static const String search = '/search';
+  static const String test = '/test';
 }

@@ -17,6 +17,12 @@ class AppTextStyle {
     fontWeight: FontWeight.w600,
     color: AppColors.black,
   );
+  static final TextStyle font18Black900 = TextStyle(
+    fontSize: 18.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w900,
+    color: AppColors.black,
+  );
   static final TextStyle font14Grey1400 = TextStyle(
     fontSize: 14.sp,
     fontFamily: 'Inter',
@@ -43,6 +49,18 @@ class AppTextStyle {
   );
   static final TextStyle font14Blue400 = TextStyle(
     fontSize: 14.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+    color: AppColors.blue,
+  );
+  static final TextStyle font14Blue500 = TextStyle(
+    fontSize: 14.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
+    color: AppColors.blue,
+  );
+  static final TextStyle font10Blue400 = TextStyle(
+    fontSize: 10.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
     color: AppColors.blue,
@@ -201,6 +219,12 @@ class AppTextStyle {
     fontSize: 12.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
+    color: AppColors.black,
+  );
+  static final TextStyle font12Black500 = TextStyle(
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
     color: AppColors.black,
   );
 }

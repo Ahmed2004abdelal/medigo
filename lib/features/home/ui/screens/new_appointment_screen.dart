@@ -17,7 +17,7 @@ class NewAppointmentScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              AppBarDetails(title: 'New Appointment', suffix: false),
+              CustomAppbarDetails(title: 'New Appointment', suffix: false),
               verticalSpace(34),
               
             ],

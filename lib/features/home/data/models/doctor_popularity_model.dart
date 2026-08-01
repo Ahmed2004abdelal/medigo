@@ -18,7 +18,7 @@ class DoctorPopularityModel {
 
 List<DoctorPopularityModel> popularity = [
   DoctorPopularityModel(
-    title: 'Patients',
+    title: 'reviews count',
     number: '1000+',
     icon: Assets.imagesIconesUsers,
     color: AppColors.britnessBabyBlue,

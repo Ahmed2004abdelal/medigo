@@ -13,8 +13,6 @@ class SpecialityModel {
   }
 }
 
-
-
 List<SpecialityModel> specialityItems = [
   SpecialityModel(
     id: "0",

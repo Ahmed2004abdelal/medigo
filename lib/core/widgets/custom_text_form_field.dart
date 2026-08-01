@@ -17,12 +17,14 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
   final String? Function(String?)? validator;
+  final bool? isEnabled;
 
   const CustomTextFormField({
     super.key,
     required this.controller,
     required this.hintText,
     this.outLable,
+    this.isEnabled,
     this.hintStyle,
     this.textInputAction,
     this.suffixIcon,
@@ -49,13 +51,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         widget.outLable != null
             ? Text(widget.outLable!, style: AppTextStyle.font14Black500)
             : SizedBox(height: 0.h, width: 0.w),
-        verticalSpace(15),
+        widget.outLable != null ? verticalSpace(15) : SizedBox.shrink(),
         TextFormField(
+          enabled: widget.isEnabled?? true,
           textInputAction: widget.textInputAction ?? TextInputAction.done,
           validator: widget.validator,
           controller: widget.controller,

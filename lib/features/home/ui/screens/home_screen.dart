@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:medigo/core/helpers/extension.dart';
+import 'package:medigo/features/home/logic/home_cubit.dart';
 import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
 import '../widgets/doctors_list_view.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/image_cover.dart';
-import '../widgets/search_and_filter.dart';
+import '../../../../core/widgets/search_and_filter.dart';
 import '../widgets/see_all_button.dart';
 import '../widgets/specialties_list.dart';
 
@@ -26,10 +30,16 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HomeAppBar(),
-                verticalSpace(25),
-                SearchAndFilter(),
+                verticalSpace(10),
+                GestureDetector(
+                  onTap: () {
+                    context.pushNamed(Routes.search);
+                  },
+                  child: SearchAndFilter(isEnabled: false),
+                ),
                 verticalSpace(25),
                 ImageCover(),
+                verticalSpace(25),
                 verticalSpace(25),
                 SeeAllButton(
                   title: loc(context)!.doctorspecialties,
@@ -40,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                 verticalSpace(25),
                 SeeAllButton(
                   title: loc(context)!.availabledoctors,
-                  onPressed: () {},
+                  onPressed: () => seeAll(context),
                 ),
                 verticalSpace(25),
                 DoctorsListView(),
@@ -54,10 +64,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
-
-
-
-
-
-
+void seeAll(BuildContext context) {
+  context.read<HomeCubit>().loadMore();
+}
