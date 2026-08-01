@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/features/onboarding/data/onboarding_model.dart';
-import 'package:medigo/features/onboarding/logic/cubit/onboarding_cubit.dart';
-import 'package:medigo/features/onboarding/ui/widgets/navigation_buttons.dart';
-import 'package:medigo/features/onboarding/ui/widgets/onboarding_indicator.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/theming/app_text_style.dart';
+import '../data/onboarding_model.dart';
+import '../logic/cubit/onboarding_cubit.dart';
+import 'widgets/navigation_buttons.dart';
+import 'widgets/onboarding_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

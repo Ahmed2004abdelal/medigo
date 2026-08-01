@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medigo/core/helpers/extension.dart';
-import 'package:medigo/core/routing/routes.dart';
-import 'package:medigo/features/onboarding/data/onboarding_model.dart';
-import 'package:medigo/features/onboarding/logic/cubit/onboarding_cubit.dart';
+import '../../../../core/helpers/extension.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/widgets/custom_button.dart';
+import '../../data/onboarding_model.dart';
+import '../../logic/cubit/onboarding_cubit.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/app_colors.dart';
@@ -27,41 +28,36 @@ class NavigationButtons extends StatelessWidget {
       children: [
         isFirst
             ? SizedBox.shrink()
-            : ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.r),
-                    side: BorderSide(
-                      width: 2.0.w,
-                      color: AppColors.britnessBlue,
-                    ),
-                  ),
-                  backgroundColor: AppColors.babyBlue,
-                  minimumSize: Size(155.w, 40.h),
+            : CustomButton(
+                text: 'Previous',
+                textStyle: AppTextStyle.font16BritnessBlue600,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(100.r),
+                  side: BorderSide(width: 2.0.w, color: AppColors.britnessBlue),
                 ),
+                backgroundColor: AppColors.babyBlue,
+                size: Size(155.w, 40.h),
                 onPressed: () {
                   cubit.previousPage();
                 },
-                child: Text(
-                  'Previous',
-                  style: AppTextStyle.font16BritnessBlue600,
-                ),
               ),
         isFirst ? SizedBox.shrink() : horizontalSpace(16.w),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.britnessBlue,
-            minimumSize: Size(isFirst ? 331.w : 155.w, 40.h),
-          ),
+        CustomButton(
+          text: isLast ? 'Get Started' : 'Next',
+          textStyle: AppTextStyle.font16White600,
+          backgroundColor: AppColors.britnessBlue,
+          size: Size(isFirst ? 331.w : 155.w, 40.h),
           onPressed: () {
-            isLast ? context.pushNamedAndRemoveUntil(Routes.login, predicate: (routes)=> false) : cubit.nextPage(onboardingItems.length);
+            isLast
+                ? context.pushNamedAndRemoveUntil(
+                    Routes.login,
+                    predicate: (routes) => false,
+                  )
+                : cubit.nextPage(onboardingItems.length);
           },
-          child: Text(
-            isLast ? 'Get Started' : 'Next',
-            style: AppTextStyle.font16White600,
-          ),
         ),
       ],
     );
   }
 }
+
