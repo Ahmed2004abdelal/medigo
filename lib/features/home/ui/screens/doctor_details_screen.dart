@@ -7,12 +7,14 @@ import 'package:medigo/core/helpers/spacing.dart';
 import 'package:medigo/core/routing/routes.dart';
 import 'package:medigo/core/theming/app_colors.dart';
 import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/features/home/data/models/avilable_doctors_model.dart';
 import 'package:medigo/features/home/data/models/doctor_popularity_model.dart';
 import 'package:medigo/features/home/data/models/working_time_model.dart';
 
+import '../../../search/data/model/doctor_model.dart';
+// import 'package:medigo/features/search/data/model/doctor_model.dart';
+
 class DoctorDetailsScreen extends StatelessWidget {
-  final AvilableDoctorsModel doctor;
+  final DoctorModel doctor;
   const DoctorDetailsScreen({super.key, required this.doctor});
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class DoctorDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppBarDetails(title: doctor.name,onTap: (){},),
+                CustomAppbarDetails(title: doctor.name, onTap: () {}),
                 verticalSpace(19),
                 Container(
                   clipBehavior: Clip.antiAlias,
@@ -51,8 +53,8 @@ class DoctorDetailsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-                  child: Image.asset(
-                    doctor.image,
+                  child: Image.network(
+                    doctor.imageUrl,
                     fit: BoxFit.fill,
                     filterQuality: FilterQuality.high,
                   ),
@@ -60,7 +62,7 @@ class DoctorDetailsScreen extends StatelessWidget {
                 verticalSpace(10),
                 NameAndPrice(doctor: doctor),
                 verticalSpace(16),
-                Popularity(),
+                Popularity(doctor: doctor),
                 verticalSpace(16),
                 Text("About", style: AppTextStyle.font14Black600),
                 verticalSpace(15),
@@ -119,7 +121,8 @@ class WorkingTimeDisplay extends StatelessWidget {
 }
 
 class Popularity extends StatelessWidget {
-  const Popularity({super.key});
+  final DoctorModel doctor;
+  const Popularity({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +169,14 @@ class Popularity extends StatelessWidget {
                   child: SvgPicture.asset(item.icon, width: 25.w, height: 25.h),
                 ),
                 verticalSpace(17),
-                Text(item.number, style: AppTextStyle.font15Black700),
+                Text(
+                  index == 0
+                      ? '${doctor.reviewsCount}+'
+                      : index == 1
+                      ? '${doctor.experienceYears} Yrs'
+                      : "${doctor.rating}",
+                  style: AppTextStyle.font15Black700,
+                ),
                 verticalSpace(3),
                 Text(item.title, style: AppTextStyle.font11Grey500),
               ],
@@ -181,7 +191,7 @@ class Popularity extends StatelessWidget {
 class NameAndPrice extends StatelessWidget {
   const NameAndPrice({super.key, required this.doctor});
 
-  final AvilableDoctorsModel doctor;
+  final DoctorModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +199,7 @@ class NameAndPrice extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 12.h,
           children: [
             Text(doctor.name, style: AppTextStyle.font16Black600),
@@ -199,7 +210,7 @@ class NameAndPrice extends StatelessWidget {
                 borderRadius: BorderRadius.circular(97),
               ),
               child: Text(
-                doctor.specialties,
+                doctor.specialty,
                 style: AppTextStyle.font14Yellow500,
               ),
             ),
@@ -208,7 +219,10 @@ class NameAndPrice extends StatelessWidget {
         RichText(
           text: TextSpan(
             children: [
-              TextSpan(text: "\$15", style: AppTextStyle.font24Blue500),
+              TextSpan(
+                text: '\$${doctor.pricePerHour.round()}',
+                style: AppTextStyle.font24Blue500,
+              ),
               TextSpan(text: '/hr', style: AppTextStyle.font14Blue400),
             ],
           ),
@@ -218,18 +232,20 @@ class NameAndPrice extends StatelessWidget {
   }
 }
 
-class AppBarDetails extends StatelessWidget {
+class CustomAppbarDetails extends StatelessWidget {
   final String title;
   final bool? suffix;
   final void Function()? onTap;
-  const AppBarDetails({
-    super.key, 
-    required this.title, 
+  final TextStyle? style;
+  final Widget? suffixWidget;
+  const CustomAppbarDetails({
+    super.key,
+    required this.title,
     this.suffix = true,
     this.onTap,
-    }
-    );
-
+    this.style,
+    this.suffixWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -248,17 +264,18 @@ class AppBarDetails extends StatelessWidget {
           ),
         ),
         horizontalSpace(16),
-        Text(title, style: AppTextStyle.font14Black600),
+        Text(title, style: style ?? AppTextStyle.font14Black600),
         Spacer(),
         suffix!
-            ? GestureDetector(
-                onTap: onTap,
-                child: SvgPicture.asset(
-                  Assets.imagesIconesHeart,
-                  width: 20.w,
-                  height: 17.h,
-                ),
-              )
+            ? suffixWidget ??
+                  GestureDetector(
+                    onTap: onTap,
+                    child: SvgPicture.asset(
+                      Assets.imagesIconesHeart,
+                      width: 20.w,
+                      height: 17.h,
+                    ),
+                  )
             : SizedBox.shrink(),
       ],
     );

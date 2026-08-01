@@ -18,14 +18,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool _navigated = false; // عشان مانعملش navigation أكتر من مرة
-  bool _authReady = false; // الـ auth جهز؟
-  bool _brandingDone = false; // عدّت الـ 3 ثواني؟
+  bool _navigated = false; 
+  bool _authReady = false; 
+  bool _brandingDone = false;
 
   @override
   void initState() {
     super.initState();
-    // المؤقّت يتعمل مرة واحدة بس هنا (مش في build)
     Future.delayed(const Duration(seconds: 3), () {
       _brandingDone = true;
       _tryGoNext();
@@ -33,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _tryGoNext() {
-    // لازم الاتنين يخلصوا: الـ auth جاهز + عدّت الـ 3 ثواني
     if (_navigated || !_authReady || !_brandingDone) return;
     _navigated = true;
 
@@ -52,16 +50,13 @@ class _SplashScreenState extends State<SplashScreen> {
     return StreamBuilder<AuthState>(
       stream: widget.authServices.authStateChanges(),
       builder: (context, snapshot) {
-        // ✅ طول ما لسه بيستنى أول حدث → فضل في السبلاش
         if (snapshot.connectionState != ConnectionState.waiting) {
-          // أول ما الـ auth يجهز → علّم إنه جاهز وحاول تنتقل
           _authReady = true;
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) _tryGoNext();
           });
         }
 
-        // في كل الحالات بنعرض شاشة السبلاش (لحد ما الـ navigation يحصل)
         return _buildSplashUI();
       },
     );
