@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/data/dummy.dart';
+import 'core/theming/app_colors.dart';
+import 'data/dummy.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  final int? selectedIndex;
+  const BottomNavBar({super.key, this.selectedIndex});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int currentPage = 0;
+  late int currentPage;
+
+  @override
+  void initState() {
+    currentPage = widget.selectedIndex ?? 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: bottomNavigationItems[currentPage].page,
+      body: IndexedStack(
+        index: currentPage,
+        children: bottomNavigationItems.map((e) => e.page).toList(),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [

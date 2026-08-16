@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/core/widgets/search_and_filter.dart';
-import 'package:medigo/features/home/ui/screens/doctor_details_screen.dart';
-import 'package:medigo/features/search/data/model/doctor_model.dart';
-import 'package:medigo/features/search/logic/search_cubit.dart';
+import '../../../core/constants/assets.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/theming/app_colors.dart';
+import '../../../core/theming/app_text_style.dart';
+import '../../../core/widgets/search_and_filter.dart';
+import '../../home/ui/screens/doctor_details_screen.dart';
+import '../data/model/doctor_model.dart';
+import '../logic/search_cubit.dart';
 
 import '../logic/search_state.dart';
 

@@ -3,14 +3,14 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medigo/core/helpers/extension.dart';
+import '../../../../core/helpers/extension.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_text_style.dart';
-import '../../logic/home_cubit.dart';
-import '../../logic/home_state.dart';
 
 import '../../../search/data/model/doctor_model.dart';
+import '../../logic/home_cubit/home_cubit.dart';
+import '../../logic/home_cubit/home_state.dart';
 
 class DoctorsListView extends StatelessWidget {
   const DoctorsListView({super.key});
@@ -18,20 +18,26 @@ class DoctorsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
-        return state.when(
-          initial: () => const SizedBox.shrink(),
-          loading: () => _buildSkeletonLoading(),
-          loaded: (doctors, hasNextPage, isLoadingMore) {
+        switch (state.status) {
+          case HomeStatus.initial:
+            return const SizedBox.shrink();
+          case HomeStatus.loading:
+            return _buildSkeletonLoading();
+          case HomeStatus.loaded:
             return _buildDoctorsList(
               context: context,
-              doctors: doctors,
-              hasNextPage: hasNextPage,
-              isLoadingMore: isLoadingMore,
+              doctors: state.doctors,
+              hasNextPage: state.hasNextPage,
+              isLoadingMore: state.isLoadingMore,
             );
-          },
-          error: (message) => _buildError(context, message),
-        );
+          case HomeStatus.error:
+            return _buildError(
+              context,
+              state.errorMessage ?? 'Something went wrong',
+            );
+        }
       },
     );
   }
@@ -160,10 +166,13 @@ class DoctorsListView extends StatelessWidget {
         ),
         child: Center(
           child: isLoadingMore
-              ?  SizedBox(
+              ? SizedBox(
                   width: 20,
                   height: 20,
-                  child: SpinKitFadingCircle(color: AppColors.blue, size: 40.0.sp),
+                  child: SpinKitFadingCircle(
+                    color: AppColors.blue,
+                    size: 40.0.sp,
+                  ),
                 )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,

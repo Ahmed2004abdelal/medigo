@@ -1,43 +1,55 @@
+// Flutter & Packages
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// Bottom Nav & Test
 import 'package:medigo/bottom_nav_bar.dart';
+// Core
 import 'package:medigo/core/routing/routes.dart';
-import 'package:medigo/features/appointment/ui/appointment_screen.dart';
+// Home
 import 'package:medigo/features/home/data/repo/doctor_repository.dart';
-import 'package:medigo/features/home/logic/home_cubit.dart';
+import 'package:medigo/features/home/data/repo/new_appointment_repository.dart';
+import 'package:medigo/features/home/logic/home_cubit/home_cubit.dart';
+import 'package:medigo/features/home/logic/new_appointment_cubit/new_appointment_cubit.dart';
+import 'package:medigo/features/home/ui/screens/appointment_success_screen.dart';
 import 'package:medigo/features/home/ui/screens/doctor_details_screen.dart';
 import 'package:medigo/features/home/ui/screens/new_appointment_screen.dart';
 import 'package:medigo/features/home/ui/screens/patient_details_screen.dart';
+// Liked & Profile
 import 'package:medigo/features/liked/ui/liked_screen.dart';
 import 'package:medigo/features/profile/ui/profile_screen.dart';
+// Search
 import 'package:medigo/features/search/data/model/doctor_model.dart';
 import 'package:medigo/test.dart';
-import '../../features/search/logic/search_cubit.dart';
-import '../../features/search/ui/search_screen.dart';
-import '../di/dependency_injection.dart';
-import '../network/auth/supabase_auth_services.dart';
+
+// Auth - Login
 import '../../features/auth/login/data/repo/login_repo.dart';
 import '../../features/auth/login/logic/login_cubit.dart';
 import '../../features/auth/login/ui/login_screen.dart';
+// Auth - Signup
 import '../../features/auth/signup/data/repo/sign_repo.dart';
 import '../../features/auth/signup/logic/signup_cubit.dart';
 import '../../features/auth/signup/ui/signup_screen.dart';
-import '../../features/home/ui/screens/home_screen.dart';
 import '../../features/onboarding/logic/cubit/onboarding_cubit.dart';
-import '../../splash_screen.dart';
-
 import '../../features/onboarding/ui/onboarding_screen.dart';
+import '../../features/search/logic/search_cubit.dart';
+import '../../features/search/ui/search_screen.dart';
+// Splash & Onboarding
+import '../../splash_screen.dart';
+import '../di/dependency_injection.dart';
+import '../network/auth/supabase_auth_services.dart';
 
 class AppRouting {
   AppRouting._();
 
   static Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      // ---------- Splash & Onboarding ----------
       case Routes.splash:
         return CupertinoPageRoute(
           builder: (_) => SplashScreen(getIt<SupabaseAuthServices>()),
         );
+
       case Routes.onboarding:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider<OnboardingCubit>(
@@ -45,15 +57,8 @@ class AppRouting {
             child: OnboardingScreen(),
           ),
         );
-      // case Routes.bottomNavigationBar:
-      //   return CupertinoPageRoute(builder: (_) => const BottomNavBar());
-      case Routes.bottomNavigationBar:
-        return CupertinoPageRoute(
-          builder: (_) => BlocProvider<HomeCubit>(
-            create: (context) => HomeCubit(getIt<DoctorRepository>()),
-            child: const BottomNavBar(),
-          ),
-        );
+
+      // ---------- Auth ----------
       case Routes.login:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider<LoginCubit>(
@@ -61,6 +66,7 @@ class AppRouting {
             child: LoginScreen(),
           ),
         );
+
       case Routes.signup:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider<SignupCubit>(
@@ -68,30 +74,26 @@ class AppRouting {
             child: SignupScreen(),
           ),
         );
-      case Routes.home:
+
+      // ---------- Main Navigation ----------
+      case Routes.bottomNavigationBar:
+        final selectedIndex = settings.arguments as int? ?? 0;
         return CupertinoPageRoute(
           builder: (_) => BlocProvider<HomeCubit>(
             create: (context) => HomeCubit(getIt<DoctorRepository>()),
-            child: HomeScreen(),
+            child: BottomNavBar(selectedIndex: selectedIndex),
           ),
         );
-      case Routes.appointment:
-        return CupertinoPageRoute(builder: (_) => const AppointmentScreen());
-      case Routes.newAppointmentScreen:
-        return CupertinoPageRoute(builder: (_) => const NewAppointmentScreen());
-      case Routes.patientDetailsScreen:
-        return CupertinoPageRoute(builder: (_) => const PatientDetailsScreen());
-      case Routes.liked:
-        return CupertinoPageRoute(builder: (_) => const LikedScreen());
-      case Routes.profile:
-        return CupertinoPageRoute(builder: (_) => const ProfileScreen());
-      case Routes.test:
-        return CupertinoPageRoute(builder: (_) => const TestScreen());
-      case Routes.doctorDetails:
-        final doctor = settings.arguments as DoctorModel;
-        return CupertinoPageRoute(
-          builder: (_) => DoctorDetailsScreen(doctor: doctor),
-        );
+
+      // case Routes.home:
+      //   return CupertinoPageRoute(
+      //     builder: (_) => BlocProvider<HomeCubit>(
+      //       create: (context) => HomeCubit(getIt<DoctorRepository>()),
+      //       child: HomeScreen(),
+      //     ),
+      //   );
+
+      // ---------- Doctor & Search ----------
       case Routes.search:
         final args = settings.arguments as Map<String, dynamic>?;
         final searchQuery = args?['title'] as String?;
@@ -107,6 +109,53 @@ class AppRouting {
             ),
           ),
         );
+
+      // ---------- Appointment ----------
+      case Routes.doctorDetails:
+        final doctor = settings.arguments as DoctorModel;
+        return CupertinoPageRoute(
+          builder: (_) => DoctorDetailsScreen(doctor: doctor),
+        );
+      case Routes.newAppointmentScreen:
+        final doctorId = settings.arguments as String?;
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider<NewAppointmentCubit>(
+            create: (context) => NewAppointmentCubit(
+              newAppointmentRepository: getIt<NewAppointmentRepository>(),
+            )..setDoctorId(doctorId ?? ''),
+            child: NewAppointmentScreen(),
+          ),
+        );
+
+      case Routes.patientDetailsScreen:
+        final cubit = settings.arguments as NewAppointmentCubit;
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider<NewAppointmentCubit>.value(
+            value: cubit,
+            child: PatientDetailsScreen(),
+          ),
+        );
+
+      case Routes.appointmentSuccessScreen:
+        final cubit = settings.arguments as NewAppointmentCubit;
+        return CupertinoPageRoute(
+          builder: (_) => BlocProvider<NewAppointmentCubit>.value(
+            value: cubit,
+            child: const AppointmentSuccessScreen(),
+          ),
+        );
+
+      // ---------- Liked & Profile ----------
+      case Routes.liked:
+        return CupertinoPageRoute(builder: (_) => const LikedScreen());
+
+      case Routes.profile:
+        return CupertinoPageRoute(builder: (_) => ProfileScreen());
+
+      // ---------- Test ----------
+      case Routes.test:
+        return CupertinoPageRoute(builder: (_) => const TestScreen());
+
       default:
         return null;
     }

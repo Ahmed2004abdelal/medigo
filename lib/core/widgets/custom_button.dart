@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
   final OutlinedBorder? shape;
   void Function()? onPressed;
-    final Widget? child;      
+  final Widget? child;
   final Size? size;
   CustomButton({
     super.key,
@@ -30,9 +30,12 @@ class CustomButton extends StatelessWidget {
         shape: shape,
         backgroundColor: backgroundColor ?? AppColors.britnessBlue,
         minimumSize: size ?? Size(double.infinity, 45.h),
+        maximumSize: size ?? Size(double.infinity, 45.h),
       ),
       onPressed: onPressed,
-      child: child ?? Text(text ?? '', style: textStyle ?? AppTextStyle.font16White600),
+      child:
+          child ??
+          Text(text ?? '', style: textStyle ?? AppTextStyle.font16White600),
     );
   }
 }
