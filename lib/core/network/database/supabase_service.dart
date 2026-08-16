@@ -19,6 +19,17 @@ abstract class SupabaseService {
     required Map<String, dynamic> filters,
   });
 
+  // ====================  READ  ====================
+  // ==================== STREAM ==================== 
+Stream<List<Map<String, dynamic>>> streamData({
+  required String table,
+  required List<String> primaryKey,
+  String? filterColumn,
+  dynamic filterValue,
+  String? orderBy,
+  bool ascending = true,
+});
+
   // ==================== CREATE ====================
 
   Future<Map<String, dynamic>> insertData({
@@ -109,6 +120,29 @@ abstract class SupabaseService {
     final response = await query.maybeSingle();
     return response;
   }
+
+@override
+Stream<List<Map<String, dynamic>>> streamData({
+  required String table,
+  required List<String> primaryKey,
+  String? filterColumn,
+  dynamic filterValue,
+  String? orderBy,
+  bool ascending = true,
+}) {
+  final stream = _client.from(table).stream(primaryKey: primaryKey);
+
+  if (filterColumn != null && filterValue != null) {
+    final filtered = stream.eq(filterColumn, filterValue);
+    return orderBy != null
+        ? filtered.order(orderBy, ascending: ascending)
+        : filtered;
+  }
+
+  return orderBy != null
+      ? stream.order(orderBy, ascending: ascending)
+      : stream;
+}
 
   // ==================== CREATE ====================
 

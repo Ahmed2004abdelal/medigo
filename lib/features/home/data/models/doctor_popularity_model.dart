@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/theming/app_colors.dart';
+import '../../../../core/constants/assets.dart';
+import '../../../../core/theming/app_colors.dart';
 
 class DoctorPopularityModel {
   final String title;
