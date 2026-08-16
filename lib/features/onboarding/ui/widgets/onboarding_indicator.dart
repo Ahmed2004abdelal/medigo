@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medigo/features/onboarding/data/onboarding_model.dart';
+import '../../data/onboarding_model.dart';
 
 import '../../../../core/theming/app_colors.dart';
 

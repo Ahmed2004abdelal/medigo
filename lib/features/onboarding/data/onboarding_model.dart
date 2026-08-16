@@ -1,4 +1,4 @@
-import 'package:medigo/core/constants/assets.dart';
+import '../../../core/constants/assets.dart';
 
 class OnboardingModel {
   String title;
