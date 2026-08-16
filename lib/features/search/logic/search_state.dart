@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:medigo/features/search/data/model/doctor_model.dart';
+import '../data/model/doctor_model.dart';
 
 part 'search_state.freezed.dart';
 

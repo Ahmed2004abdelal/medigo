@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'core/constants/assets.dart';
 import 'core/helpers/extension.dart';
 import 'core/helpers/spacing.dart';

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/helpers/extension.dart';
+import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_text_style.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../data/onboarding_model.dart';
 import '../../logic/cubit/onboarding_cubit.dart';
-
-import '../../../../core/helpers/spacing.dart';
-import '../../../../core/theming/app_colors.dart';
-import '../../../../core/theming/app_text_style.dart';
 
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({

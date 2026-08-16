@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/helpers/extension.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/routing/routes.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/features/home/data/models/doctor_popularity_model.dart';
-import 'package:medigo/features/home/data/models/working_time_model.dart';
+import '../../../../core/constants/assets.dart';
+import '../../../../core/helpers/extension.dart';
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_text_style.dart';
+import '../../data/models/doctor_popularity_model.dart';
+import '../../data/models/working_time_model.dart';
 
 import '../../../search/data/model/doctor_model.dart';
-// import 'package:medigo/features/search/data/model/doctor_model.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
   final DoctorModel doctor;
@@ -32,7 +31,10 @@ class DoctorDetailsScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: AppColors.blue,
           onPressed: () {
-            context.pushNamed(Routes.newAppointmentScreen);
+            context.pushNamed(
+              Routes.newAppointmentScreen,
+              arguments: doctor.id,
+            );
           },
           child: Text("Book Appointment", style: AppTextStyle.font16White600),
         ),
