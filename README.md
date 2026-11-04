@@ -19,24 +19,19 @@
 
 ## Screenshots
 
-<!--
-  Add your screenshots to docs/screenshots/ and uncomment this block.
+<p align="center">
+  <img src="screens/4sc-portrait.png" width="23%" alt="Login" />
+  <img src="screens/6sc-portrait.png" width="23%" alt="Home" />
+  <img src="screens/7sc-portrait.png" width="23%" alt="Search by specialty" />
+  <img src="screens/9sc-portrait.png" width="23%" alt="Doctor details" />
+</p>
 
 <p align="center">
-  <img src="docs/screenshots/onboarding.png" width="22%" alt="Onboarding" />
-  <img src="docs/screenshots/login.png"      width="22%" alt="Login" />
-  <img src="docs/screenshots/home.png"       width="22%" alt="Home" />
-  <img src="docs/screenshots/doctor.png"     width="22%" alt="Doctor details" />
+  <img src="screens/10sc-portrait.png" width="23%" alt="New appointment" />
+  <img src="screens/12sc-portrait.png" width="23%" alt="Booking confirmed" />
+  <img src="screens/14sc-portrait.png" width="23%" alt="My appointments" />
+  <img src="screens/16-portrait.png" width="23%" alt="Profile (Arabic / RTL)" />
 </p>
-<p align="center">
-  <img src="docs/screenshots/booking.png"      width="22%" alt="Book appointment" />
-  <img src="docs/screenshots/success.png"      width="22%" alt="Booking confirmed" />
-  <img src="docs/screenshots/appointments.png" width="22%" alt="My appointments" />
-  <img src="docs/screenshots/profile.png"      width="22%" alt="Profile" />
-</p>
--->
-
-_Screenshots coming soon._
 
 ## Tech stack
 
