@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medigo/features/search/logic/search_state.dart';
-import 'package:medigo/features/search/data/model/doctor_model.dart';
+import 'search_state.dart';
+import '../data/model/doctor_model.dart';
 
 import '../../home/data/repo/doctor_repository.dart';
 

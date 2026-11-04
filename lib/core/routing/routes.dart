@@ -14,4 +14,5 @@ class Routes{
   static const String appointment = '/appointment';
   static const String search = '/search';
   static const String test = '/test';
+  static const String appointmentSuccessScreen = '/appointmentSuccessScreen';
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/helpers/extension.dart';
+import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_text_style.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../data/onboarding_model.dart';
 import '../../logic/cubit/onboarding_cubit.dart';
-
-import '../../../../core/helpers/spacing.dart';
-import '../../../../core/theming/app_colors.dart';
-import '../../../../core/theming/app_text_style.dart';
 
 class NavigationButtons extends StatelessWidget {
   const NavigationButtons({
@@ -29,7 +29,7 @@ class NavigationButtons extends StatelessWidget {
         isFirst
             ? SizedBox.shrink()
             : CustomButton(
-                text: 'Previous',
+                text: 'Previous',//!text
                 textStyle: AppTextStyle.font16BritnessBlue600,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.r),
@@ -43,7 +43,7 @@ class NavigationButtons extends StatelessWidget {
               ),
         isFirst ? SizedBox.shrink() : horizontalSpace(16.w),
         CustomButton(
-          text: isLast ? 'Get Started' : 'Next',
+          text: isLast ? 'Get Started' : 'Next',//!text
           textStyle: AppTextStyle.font16White600,
           backgroundColor: AppColors.britnessBlue,
           size: Size(isFirst ? 331.w : 155.w, 40.h),

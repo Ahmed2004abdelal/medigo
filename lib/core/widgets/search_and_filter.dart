@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../constants/assets.dart';
 import '../helpers/spacing.dart';
 import '../theming/app_colors.dart';
@@ -33,7 +34,7 @@ class SearchAndFilter extends StatelessWidget {
                 ),
               ),
               hintStyle: AppTextStyle.font14LightGrey400,
-              hintText: loc(context)!.findtherightdoctorforyou,
+              hintText: loc(context)!.findTheRightDoctorForYou,
               // : InputBorder.none,
             ),
           ),

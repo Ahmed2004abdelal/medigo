@@ -44,14 +44,14 @@ void _showSuccessDialog({
       return AlertDialog(
         title: Text(AppLocalizations.of(context)!.success),
         content: Text(
-          AppLocalizations.of(context)!.checkyouremailtoverification,
+          AppLocalizations.of(context)!.checkYourEmailToVerification,
         ),
         actions: [
           TextButton(
             onPressed: () async {
               await _openEmailApp(dialogContext, email);
             },
-            child: Text(AppLocalizations.of(context)!.openemail),
+            child: Text(AppLocalizations.of(context)!.openEmail),
           ),
           TextButton(
             onPressed: () {
@@ -97,7 +97,7 @@ Future<void> _openEmailApp(BuildContext context, String email) async {
       
       SnackBar(
         content:  CustomSnackBar(
-        text: AppLocalizations.of(context)!.noemailapp,
+        text: AppLocalizations.of(context)!.noEmailApp,
         color: Colors.red,
       ),
         backgroundColor: Colors.transparent,

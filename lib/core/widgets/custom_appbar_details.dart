@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/helpers/extension.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
+import '../constants/assets.dart';
+import '../helpers/extension.dart';
+import '../helpers/spacing.dart';
+import '../theming/app_colors.dart';
+import '../theming/app_text_style.dart';
 
 class CustomAppbarDetails extends StatelessWidget {
   final String title;

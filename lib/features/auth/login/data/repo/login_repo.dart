@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../../../core/network/auth/supabase_auth_services.dart';
 import '../../../../../core/network/failure.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class LoginRepo {
   Future<Either<Failure, User>> login({

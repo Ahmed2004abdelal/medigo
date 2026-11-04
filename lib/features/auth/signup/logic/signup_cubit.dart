@@ -41,20 +41,20 @@ class SignupCubit extends Cubit<SignupState> {
     (user) => emit(SignupState.success()));
   }
 
-  @override
-  Future<void> close() {
-    // ignore: invalid_use_of_protected_member
-    formKey.currentState!.dispose();
-    nameController.dispose();
-    emailController.dispose();
-    phoneNumberController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    nameFocusNode.dispose();
-    emailFocusNode.dispose();
-    phoneNumberFocusNode.dispose();
-    passwordFocusNode.dispose();
-    confirmPasswordFocusNode.dispose();
-    return super.close();
-  }
+@override
+Future<void> close() {
+  nameController.dispose();
+  emailController.dispose();
+  phoneNumberController.dispose();
+  passwordController.dispose();
+  confirmPasswordController.dispose();
+
+  nameFocusNode.dispose();
+  emailFocusNode.dispose();
+  phoneNumberFocusNode.dispose();
+  passwordFocusNode.dispose();
+  confirmPasswordFocusNode.dispose();
+
+  return super.close();
+}
 }

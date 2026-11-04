@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/helpers/extension.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/routing/routes.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/features/home/data/models/doctor_popularity_model.dart';
-import 'package:medigo/features/home/data/models/working_time_model.dart';
+import 'package:medigo/features/home/logic/home_cubit/home_state.dart';
+import '../../../../core/constants/assets.dart';
+import '../../../../core/helpers/extension.dart';
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/helpers/specialization.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_text_style.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../data/models/doctor_popularity_model.dart';
+import '../../data/models/working_time_model.dart';
 
 import '../../../search/data/model/doctor_model.dart';
-// import 'package:medigo/features/search/data/model/doctor_model.dart';
+import '../../logic/home_cubit/home_cubit.dart';
 
-class DoctorDetailsScreen extends StatelessWidget {
+class DoctorDetailsScreen extends StatefulWidget {
   final DoctorModel doctor;
   const DoctorDetailsScreen({super.key, required this.doctor});
+
+  @override
+  State<DoctorDetailsScreen> createState() => _DoctorDetailsScreenState();
+}
+
+class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
+  @override
+  void initState() {
+    context.read<HomeCubit>().fetchFavorites();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +48,15 @@ class DoctorDetailsScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: AppColors.blue,
           onPressed: () {
-            context.pushNamed(Routes.newAppointmentScreen);
+            context.pushNamed(
+              Routes.newAppointmentScreen,
+              arguments: widget.doctor.id,
+            );
           },
-          child: Text("Book Appointment", style: AppTextStyle.font16White600),
+          child: Text(
+            AppLocalizations.of(context)!.bookAppointment,
+            style: AppTextStyle.font16White600,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -44,7 +66,13 @@ class DoctorDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomAppbarDetails(title: doctor.name, onTap: () {}),
+                CustomAppbarDetails(
+                  title: widget.doctor.name,
+                  onTap: () {
+                    context.read<HomeCubit>().toggleFavorite(widget.doctor.id!);
+                  },
+                  doctorId: widget.doctor.id,
+                ),
                 verticalSpace(19),
                 Container(
                   clipBehavior: Clip.antiAlias,
@@ -54,25 +82,32 @@ class DoctorDetailsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: Image.network(
-                    doctor.imageUrl,
+                    widget.doctor.imageUrl,
                     fit: BoxFit.fill,
                     filterQuality: FilterQuality.high,
                   ),
                 ),
                 verticalSpace(10),
-                NameAndPrice(doctor: doctor),
+                NameAndPrice(doctor: widget.doctor),
                 verticalSpace(16),
-                Popularity(doctor: doctor),
+                Popularity(doctor: widget.doctor),
                 verticalSpace(16),
-                Text("About", style: AppTextStyle.font14Black600),
+                Text(
+                  AppLocalizations.of(context)!.about,
+                  style: AppTextStyle.font14Black600,
+                ),
                 verticalSpace(15),
                 Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                  AppLocalizations.of(context)!.doctorAbout,
+                  // "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                   style: AppTextStyle.font12Grey400,
                   textAlign: TextAlign.justify,
                 ),
                 verticalSpace(16),
-                Text("Working Time", style: AppTextStyle.font14Black600),
+                Text(
+                  AppLocalizations.of(context)!.workingTime,
+                  style: AppTextStyle.font14Black600,
+                ),
                 verticalSpace(15),
                 WorkingTimeDisplay(),
                 verticalSpace(60),
@@ -173,7 +208,7 @@ class Popularity extends StatelessWidget {
                   index == 0
                       ? '${doctor.reviewsCount}+'
                       : index == 1
-                      ? '${doctor.experienceYears} Yrs'
+                      ? '${doctor.experienceYears} ${AppLocalizations.of(context)!.years}'
                       : "${doctor.rating}",
                   style: AppTextStyle.font15Black700,
                 ),
@@ -206,12 +241,12 @@ class NameAndPrice extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 15.w),
               decoration: BoxDecoration(
-                color: AppColors.lighteryellow,
+                color: AppColors.blue,
                 borderRadius: BorderRadius.circular(97),
               ),
               child: Text(
-                doctor.specialty,
-                style: AppTextStyle.font14Yellow500,
+                getLocalizedSpecialityTitle(context, doctor.specialty),
+                style: AppTextStyle.font12White600,
               ),
             ),
           ],
@@ -223,7 +258,10 @@ class NameAndPrice extends StatelessWidget {
                 text: '\$${doctor.pricePerHour.round()}',
                 style: AppTextStyle.font24Blue500,
               ),
-              TextSpan(text: '/hr', style: AppTextStyle.font14Blue400),
+              TextSpan(
+                text: AppLocalizations.of(context)!.hour,
+                style: AppTextStyle.font14Blue400,
+              ),
             ],
           ),
         ),
@@ -233,6 +271,8 @@ class NameAndPrice extends StatelessWidget {
 }
 
 class CustomAppbarDetails extends StatelessWidget {
+  final String? doctorId;
+  final bool? isfavorite;
   final String title;
   final bool? suffix;
   final void Function()? onTap;
@@ -241,6 +281,8 @@ class CustomAppbarDetails extends StatelessWidget {
   const CustomAppbarDetails({
     super.key,
     required this.title,
+    this.doctorId,
+    this.isfavorite,
     this.suffix = true,
     this.onTap,
     this.style,
@@ -267,17 +309,71 @@ class CustomAppbarDetails extends StatelessWidget {
         Text(title, style: style ?? AppTextStyle.font14Black600),
         Spacer(),
         suffix!
-            ? suffixWidget ??
-                  GestureDetector(
-                    onTap: onTap,
-                    child: SvgPicture.asset(
-                      Assets.imagesIconesHeart,
-                      width: 20.w,
-                      height: 17.h,
-                    ),
-                  )
+            ? suffixWidget ?? FavoriteBlocBuilder(onTap, doctorId!)
             : SizedBox.shrink(),
       ],
+    );
+  }
+}
+
+// class FavoriteBlocBuilder extends StatelessWidget {
+//   final void Function()? onTap;
+//   final bool? isfavorite;
+//   const FavoriteBlocBuilder(this.onTap, this.isfavorite, {super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<HomeCubit, HomeState>(
+//       builder: (context, state) {
+//         return switch (state.status) {
+//           HomeStatus.loading => const Center(
+//             child: CircularProgressIndicator(),
+//           ),
+//           HomeStatus.error => Center(child: Text(state.errorMessage ?? '')),
+//           HomeStatus.favorite => GestureDetector(
+//             onTap: onTap,
+//             child: context.read<HomeCubit>().state.isFavorite == true
+//                 ? Icon(Icons.favorite_rounded, color: Colors.red, size: 20.w)
+//                 : SvgPicture.asset(
+//                     Assets.imagesIconesHeart,
+//                     width: 20.w,
+//                     height: 20.h,
+//                   ),
+//           ),
+//           _ => SvgPicture.asset(
+//             Assets.imagesIconesHeart,
+//             width: 20.w,
+//             height: 20.h,
+//           ),
+//         };
+//       },
+//     );
+//   }
+// }
+class FavoriteBlocBuilder extends StatelessWidget {
+  final void Function()? onTap;
+  final String doctorId;
+  const FavoriteBlocBuilder(this.onTap, this.doctorId, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) =>
+          previous.favoriteDoctorIds.contains(doctorId) !=
+          current.favoriteDoctorIds.contains(doctorId),
+      builder: (context, state) {
+        final isFavorite = state.favoriteDoctorIds.contains(doctorId);
+        return GestureDetector(
+          onTap: onTap,
+          child: isFavorite
+              ? Icon(Icons.favorite_rounded, color: Colors.red, size: 20.w)
+              : SvgPicture.asset(
+                  Assets.imagesIconesHeart,
+                  width: 20.w,
+                  height: 20.h,
+                ),
+        );
+      },
     );
   }
 }

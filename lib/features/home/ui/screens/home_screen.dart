@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medigo/core/helpers/extension.dart';
-import 'package:medigo/features/home/logic/home_cubit.dart';
+import '../../../../core/helpers/extension.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
+import '../../logic/home_cubit/home_cubit.dart';
 import '../widgets/doctors_list_view.dart';
 import '../widgets/home_app_bar.dart';
 import '../widgets/image_cover.dart';
@@ -42,14 +42,14 @@ class HomeScreen extends StatelessWidget {
                 verticalSpace(25),
                 verticalSpace(25),
                 SeeAllButton(
-                  title: loc(context)!.doctorspecialties,
+                  title: loc(context)!.doctorSpecialties,
                   onPressed: () {},
                 ),
                 verticalSpace(25),
                 SpecialtiesList(),
                 verticalSpace(25),
                 SeeAllButton(
-                  title: loc(context)!.availabledoctors,
+                  title: loc(context)!.availableDoctors,
                   onPressed: () => seeAll(context),
                 ),
                 verticalSpace(25),

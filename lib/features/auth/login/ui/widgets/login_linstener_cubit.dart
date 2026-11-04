@@ -16,11 +16,12 @@ class LoginLinstenerCubit extends StatelessWidget {
         state.maybeWhen(
           orElse: () {},
           success: () {
-  context.pushNamedAndRemoveUntil(
-    Routes.home,
-    predicate: (route) => false,
-  );
-},
+            context.pushNamedAndRemoveUntil(
+              Routes.bottomNavigationBar,
+              arguments: 0,
+              predicate: (route) => false,
+            );
+          },
           error: (message) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

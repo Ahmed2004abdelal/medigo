@@ -30,6 +30,8 @@ class Assets {
 
   static const String imagesIconesClock = "assets/images/icones/clock.svg";
 
+  static const String imagesIconesDateIcon = "assets/images/icones/date_icon.svg";
+
   static const String imagesIconesExperience = "assets/images/icones/experience.png";
 
   static const String imagesIconesEye = "assets/images/icones/eye.svg";
@@ -50,11 +52,17 @@ class Assets {
 
   static const String imagesIconesHome = "assets/images/icones/home.svg";
 
+  static const String imagesIconesHome2 = "assets/images/icones/home2.svg";
+
   static const String imagesIconesHomeVisit = "assets/images/icones/home_visit.png";
 
   static const String imagesIconesHospital = "assets/images/icones/hospital.png";
 
-  static const String imagesIconesMale = "assets/images/icones/male.png";
+  static const String imagesIconesHospital2 = "assets/images/icones/hospital2.svg";
+
+  // static const String imagesIconesMalepng = "assets/images/icones/malepng.png";
+
+  static const String imagesIconesMalesvg = "assets/images/icones/malesvg.svg";
 
   static const String imagesIconesMessaging = "assets/images/icones/messaging.svg";
 
@@ -81,6 +89,8 @@ class Assets {
   static const String imagesIconesUsers = "assets/images/icones/users.svg";
 
   static const String imagesIconesVideoCall = "assets/images/icones/video_call.svg";
+
+  static const String imagesLogoIconLauncher = "assets/images/logo/icon_launcher.png";
 
   static const String imagesLogoLogoImage = "assets/images/logo/logo_image.svg";
 

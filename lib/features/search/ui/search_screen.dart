@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:medigo/core/constants/assets.dart';
-import 'package:medigo/core/helpers/spacing.dart';
-import 'package:medigo/core/theming/app_colors.dart';
-import 'package:medigo/core/theming/app_text_style.dart';
-import 'package:medigo/core/widgets/search_and_filter.dart';
-import 'package:medigo/features/home/ui/screens/doctor_details_screen.dart';
-import 'package:medigo/features/search/data/model/doctor_model.dart';
-import 'package:medigo/features/search/logic/search_cubit.dart';
+import 'package:medigo/core/helpers/extension.dart';
+import 'package:medigo/l10n/app_localizations.dart';
+import '../../../core/constants/assets.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/routing/routes.dart';
+import '../../../core/theming/app_colors.dart';
+import '../../../core/theming/app_text_style.dart';
+import '../../../core/widgets/search_and_filter.dart';
+import '../../home/ui/screens/doctor_details_screen.dart';
+import '../data/model/doctor_model.dart';
+import '../logic/search_cubit.dart';
 
 import '../logic/search_state.dart';
 
@@ -43,11 +46,13 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               children: [
                 CustomAppbarDetails(
-                  title: widget.searchQuery ?? 'Doctor',
+                  title:
+                      widget.searchQuery ??
+                      AppLocalizations.of(context)!.doctor,
                   suffix: true,
                   style: AppTextStyle.font16Grey400,
                   suffixWidget: SvgPicture.asset(
-                    widget.logo ?? Assets.imagesIconesMale,
+                    widget.logo ?? Assets.imagesIconesMalesvg,
                     width: 20.w,
                     height: 25.h,
                   ),
@@ -110,14 +115,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                     final doctor = doctors[index];
                                     return GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DoctorDetailsScreen(
-                                                  doctor: doctor,
-                                                ),
-                                          ),
+                                        context.pushNamed(
+                                          Routes.doctorDetails,
+                                          arguments: doctor,
                                         );
                                       },
                                       child: DoctorDetailsDisplay(
@@ -211,7 +211,7 @@ class DoctorDetailsDisplay extends StatelessWidget {
                       style: AppTextStyle.font12Black500,
                     ),
                     Text(
-                      ' (${doctor!.reviewsCount} Reviews)',
+                      ' (${doctor!.reviewsCount} Reviews)', //!text
                       style: AppTextStyle.font12Grey400,
                     ),
                   ],
@@ -239,7 +239,10 @@ class DoctorDetailsDisplay extends StatelessWidget {
                       text: "\$${doctor!.pricePerHour.toStringAsFixed(2)}",
                       style: AppTextStyle.font14Blue500,
                     ),
-                    TextSpan(text: '/hr', style: AppTextStyle.font10Blue400),
+                    TextSpan(
+                      text: '/hr',
+                      style: AppTextStyle.font10Blue400,
+                    ), //!text
                   ],
                 ),
               ),
@@ -270,11 +273,14 @@ class SortByAndFounded extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "${filteredDoctors.length} Founded for ",
+                text:
+                    AppLocalizations.of(context)!.foundedFor +
+                    "${filteredDoctors.length} ",
                 style: AppTextStyle.font14Grey400,
               ),
               TextSpan(
-                text: "“${searchQuery ?? 'Doctor'}”",
+                text:
+                    "“${searchQuery!.isEmpty ? AppLocalizations.of(context)!.doctor : searchQuery}”",
                 style: AppTextStyle.font14Grey600,
               ),
             ],
@@ -295,7 +301,10 @@ class SortByAndFounded extends StatelessWidget {
           },
           child: Row(
             children: [
-              Text("Sort by", style: AppTextStyle.font14Blue500),
+              Text(
+                AppLocalizations.of(context)!.sortby,
+                style: AppTextStyle.font14Blue500,
+              ),
               horizontalSpace(10),
               SvgPicture.asset(
                 Assets.imagesIconesSort,

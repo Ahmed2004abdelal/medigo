@@ -18,7 +18,7 @@ class SeeAllButton extends StatelessWidget {
         TextButton(
           onPressed: onPressed,
           child: Text(
-            loc(context)!.seeall,
+            loc(context)!.seeAll,
             style: AppTextStyle.font13BritnessBlue400,
           ),
         ),

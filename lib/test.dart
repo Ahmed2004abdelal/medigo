@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medigo/features/search/data/model/doctor_model.dart';
+import 'features/search/data/model/doctor_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Test {

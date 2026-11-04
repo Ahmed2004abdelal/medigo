@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'app_colors.dart';
 
 class AppTextStyle {
@@ -21,6 +22,12 @@ class AppTextStyle {
     fontSize: 18.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w900,
+    color: AppColors.black,
+  );
+  static final TextStyle font16Black700 = TextStyle(
+    fontSize: 16.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w700,
     color: AppColors.black,
   );
   static final TextStyle font14Grey1400 = TextStyle(
@@ -79,6 +86,30 @@ class AppTextStyle {
   );
   static final TextStyle font16White600 = TextStyle(
     fontSize: 16.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  static final TextStyle font24White500 = TextStyle(
+    fontSize: 24.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
+    color: Colors.white,
+  );
+  static final TextStyle font24Red500 = TextStyle(
+    fontSize: 24.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
+    color: Colors.red,
+  );
+  static final TextStyle font12White400 = TextStyle(
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+  );
+  static final TextStyle font12White600 = TextStyle(
+    fontSize: 12.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w600,
     color: Colors.white,
@@ -143,6 +174,12 @@ class AppTextStyle {
     fontWeight: FontWeight.w600,
     color: AppColors.black,
   );
+  static final TextStyle font12Black600 = TextStyle(
+    fontSize: 14.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
   static final TextStyle font14Black500 = TextStyle(
     fontSize: 14.sp,
     fontFamily: 'Inter',
@@ -183,6 +220,12 @@ class AppTextStyle {
     fontSize: 12.sp,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
+    color: AppColors.grey,
+  );
+  static final TextStyle font12Grey500 = TextStyle(
+    fontSize: 12.sp,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w500,
     color: AppColors.grey,
   );
   static final TextStyle font13Black400 = TextStyle(

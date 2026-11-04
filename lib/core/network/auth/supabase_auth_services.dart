@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
-import '../failure.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../failure.dart';
 
 abstract class SupabaseAuthServices {
   User? getCurrentUser();
