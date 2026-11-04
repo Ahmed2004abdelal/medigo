@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NameCubitListener(),
-            Text(loc(context)!.goodmorning, style: AppTextStyle.font14Grey500),
+            Text(loc(context)!.goodMorning, style: AppTextStyle.font14Grey500),
           ],
         ),
         Card(

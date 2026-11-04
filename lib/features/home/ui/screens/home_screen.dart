@@ -42,14 +42,14 @@ class HomeScreen extends StatelessWidget {
                 verticalSpace(25),
                 verticalSpace(25),
                 SeeAllButton(
-                  title: loc(context)!.doctorspecialties,
+                  title: loc(context)!.doctorSpecialties,
                   onPressed: () {},
                 ),
                 verticalSpace(25),
                 SpecialtiesList(),
                 verticalSpace(25),
                 SeeAllButton(
-                  title: loc(context)!.availabledoctors,
+                  title: loc(context)!.availableDoctors,
                   onPressed: () => seeAll(context),
                 ),
                 verticalSpace(25),

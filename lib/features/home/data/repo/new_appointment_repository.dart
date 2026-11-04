@@ -15,7 +15,7 @@ class NewAppointmentRepository {
       await _service.insertData(table: Paths.appointment, data: model.toJson());
       return const Right(unit);
     } catch (e) {
-      return Left(ServerFailure('Failed to submit appointment: $e'));
+      return Left(ServerFailure('Failed to submit appointment'));//!text
     }
   }
 }

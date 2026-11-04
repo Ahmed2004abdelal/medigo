@@ -9,14 +9,13 @@ import 'package:medigo/core/routing/routes.dart';
 // Home
 import 'package:medigo/features/home/data/repo/doctor_repository.dart';
 import 'package:medigo/features/home/data/repo/new_appointment_repository.dart';
-import 'package:medigo/features/home/logic/home_cubit/home_cubit.dart';
 import 'package:medigo/features/home/logic/new_appointment_cubit/new_appointment_cubit.dart';
 import 'package:medigo/features/home/ui/screens/appointment_success_screen.dart';
 import 'package:medigo/features/home/ui/screens/doctor_details_screen.dart';
 import 'package:medigo/features/home/ui/screens/new_appointment_screen.dart';
 import 'package:medigo/features/home/ui/screens/patient_details_screen.dart';
 // Liked & Profile
-import 'package:medigo/features/liked/ui/liked_screen.dart';
+import 'package:medigo/features/favorites/ui/liked_screen.dart';
 import 'package:medigo/features/profile/ui/profile_screen.dart';
 // Search
 import 'package:medigo/features/search/data/model/doctor_model.dart';
@@ -79,19 +78,9 @@ class AppRouting {
       case Routes.bottomNavigationBar:
         final selectedIndex = settings.arguments as int? ?? 0;
         return CupertinoPageRoute(
-          builder: (_) => BlocProvider<HomeCubit>(
-            create: (context) => HomeCubit(getIt<DoctorRepository>()),
-            child: BottomNavBar(selectedIndex: selectedIndex),
-          ),
+          builder: (_) => BottomNavBar(selectedIndex: selectedIndex),
         );
 
-      // case Routes.home:
-      //   return CupertinoPageRoute(
-      //     builder: (_) => BlocProvider<HomeCubit>(
-      //       create: (context) => HomeCubit(getIt<DoctorRepository>()),
-      //       child: HomeScreen(),
-      //     ),
-      //   );
 
       // ---------- Doctor & Search ----------
       case Routes.search:
@@ -173,7 +162,7 @@ class DefaultScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text("no route defined...!"),
+          child: Text("no route defined...!"), //!text
         ),
       ),
     );

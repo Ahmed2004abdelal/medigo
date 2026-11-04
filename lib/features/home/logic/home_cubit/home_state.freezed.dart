@@ -14,7 +14,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeState {
 
- String get userName; HomeStatus get status; List<DoctorModel> get doctors; bool get hasNextPage; bool get isLoadingMore; String? get errorMessage;
+ String get userName; String get languageCode; HomeStatus get status; List<DoctorModel> get doctors; bool get hasNextPage; bool get isLoadingMore; bool get isFavorite; Set<String> get favoriteDoctorIds;// بدل isFavorite
+ String? get favoriteError;// جديد (اختياري)
+ String? get errorMessage;
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +27,16 @@ $HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.doctors, doctors)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.doctors, doctors)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&const DeepCollectionEquality().equals(other.favoriteDoctorIds, favoriteDoctorIds)&&(identical(other.favoriteError, favoriteError) || other.favoriteError == favoriteError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userName,status,const DeepCollectionEquality().hash(doctors),hasNextPage,isLoadingMore,errorMessage);
+int get hashCode => Object.hash(runtimeType,userName,languageCode,status,const DeepCollectionEquality().hash(doctors),hasNextPage,isLoadingMore,isFavorite,const DeepCollectionEquality().hash(favoriteDoctorIds),favoriteError,errorMessage);
 
 @override
 String toString() {
-  return 'HomeState(userName: $userName, status: $status, doctors: $doctors, hasNextPage: $hasNextPage, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage)';
+  return 'HomeState(userName: $userName, languageCode: $languageCode, status: $status, doctors: $doctors, hasNextPage: $hasNextPage, isLoadingMore: $isLoadingMore, isFavorite: $isFavorite, favoriteDoctorIds: $favoriteDoctorIds, favoriteError: $favoriteError, errorMessage: $errorMessage)';
 }
 
 
@@ -45,7 +47,7 @@ abstract mixin class $HomeStateCopyWith<$Res>  {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
 @useResult
 $Res call({
- String userName, HomeStatus status, List<DoctorModel> doctors, bool hasNextPage, bool isLoadingMore, String? errorMessage
+ String userName, String languageCode, HomeStatus status, List<DoctorModel> doctors, bool hasNextPage, bool isLoadingMore, bool isFavorite, Set<String> favoriteDoctorIds, String? favoriteError, String? errorMessage
 });
 
 
@@ -62,14 +64,18 @@ class _$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userName = null,Object? status = null,Object? doctors = null,Object? hasNextPage = null,Object? isLoadingMore = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userName = null,Object? languageCode = null,Object? status = null,Object? doctors = null,Object? hasNextPage = null,Object? isLoadingMore = null,Object? isFavorite = null,Object? favoriteDoctorIds = null,Object? favoriteError = freezed,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as HomeStatus,doctors: null == doctors ? _self.doctors : doctors // ignore: cast_nullable_to_non_nullable
 as List<DoctorModel>,hasNextPage: null == hasNextPage ? _self.hasNextPage : hasNextPage // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as bool,isFavorite: null == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
+as bool,favoriteDoctorIds: null == favoriteDoctorIds ? _self.favoriteDoctorIds : favoriteDoctorIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,favoriteError: freezed == favoriteError ? _self.favoriteError : favoriteError // ignore: cast_nullable_to_non_nullable
+as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -155,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userName,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String userName,  String languageCode,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  bool isFavorite,  Set<String> favoriteDoctorIds,  String? favoriteError,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.errorMessage);case _:
+return $default(_that.userName,_that.languageCode,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.isFavorite,_that.favoriteDoctorIds,_that.favoriteError,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -176,10 +182,10 @@ return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userName,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String userName,  String languageCode,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  bool isFavorite,  Set<String> favoriteDoctorIds,  String? favoriteError,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _HomeState():
-return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.errorMessage);case _:
+return $default(_that.userName,_that.languageCode,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.isFavorite,_that.favoriteDoctorIds,_that.favoriteError,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +202,10 @@ return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userName,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String userName,  String languageCode,  HomeStatus status,  List<DoctorModel> doctors,  bool hasNextPage,  bool isLoadingMore,  bool isFavorite,  Set<String> favoriteDoctorIds,  String? favoriteError,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeState() when $default != null:
-return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.errorMessage);case _:
+return $default(_that.userName,_that.languageCode,_that.status,_that.doctors,_that.hasNextPage,_that.isLoadingMore,_that.isFavorite,_that.favoriteDoctorIds,_that.favoriteError,_that.errorMessage);case _:
   return null;
 
 }
@@ -211,10 +217,11 @@ return $default(_that.userName,_that.status,_that.doctors,_that.hasNextPage,_tha
 
 
 class _HomeState implements HomeState {
-  const _HomeState({this.userName = '', this.status = HomeStatus.initial, final  List<DoctorModel> doctors = const [], this.hasNextPage = true, this.isLoadingMore = false, this.errorMessage}): _doctors = doctors;
+  const _HomeState({this.userName = '', this.languageCode = 'en', this.status = HomeStatus.initial, final  List<DoctorModel> doctors = const [], this.hasNextPage = true, this.isLoadingMore = false, this.isFavorite = false, final  Set<String> favoriteDoctorIds = const <String>{}, this.favoriteError, this.errorMessage}): _doctors = doctors,_favoriteDoctorIds = favoriteDoctorIds;
   
 
 @override@JsonKey() final  String userName;
+@override@JsonKey() final  String languageCode;
 @override@JsonKey() final  HomeStatus status;
  final  List<DoctorModel> _doctors;
 @override@JsonKey() List<DoctorModel> get doctors {
@@ -225,6 +232,17 @@ class _HomeState implements HomeState {
 
 @override@JsonKey() final  bool hasNextPage;
 @override@JsonKey() final  bool isLoadingMore;
+@override@JsonKey() final  bool isFavorite;
+ final  Set<String> _favoriteDoctorIds;
+@override@JsonKey() Set<String> get favoriteDoctorIds {
+  if (_favoriteDoctorIds is EqualUnmodifiableSetView) return _favoriteDoctorIds;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableSetView(_favoriteDoctorIds);
+}
+
+// بدل isFavorite
+@override final  String? favoriteError;
+// جديد (اختياري)
 @override final  String? errorMessage;
 
 /// Create a copy of HomeState
@@ -237,16 +255,16 @@ _$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._doctors, _doctors)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.languageCode, languageCode) || other.languageCode == languageCode)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._doctors, _doctors)&&(identical(other.hasNextPage, hasNextPage) || other.hasNextPage == hasNextPage)&&(identical(other.isLoadingMore, isLoadingMore) || other.isLoadingMore == isLoadingMore)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&const DeepCollectionEquality().equals(other._favoriteDoctorIds, _favoriteDoctorIds)&&(identical(other.favoriteError, favoriteError) || other.favoriteError == favoriteError)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userName,status,const DeepCollectionEquality().hash(_doctors),hasNextPage,isLoadingMore,errorMessage);
+int get hashCode => Object.hash(runtimeType,userName,languageCode,status,const DeepCollectionEquality().hash(_doctors),hasNextPage,isLoadingMore,isFavorite,const DeepCollectionEquality().hash(_favoriteDoctorIds),favoriteError,errorMessage);
 
 @override
 String toString() {
-  return 'HomeState(userName: $userName, status: $status, doctors: $doctors, hasNextPage: $hasNextPage, isLoadingMore: $isLoadingMore, errorMessage: $errorMessage)';
+  return 'HomeState(userName: $userName, languageCode: $languageCode, status: $status, doctors: $doctors, hasNextPage: $hasNextPage, isLoadingMore: $isLoadingMore, isFavorite: $isFavorite, favoriteDoctorIds: $favoriteDoctorIds, favoriteError: $favoriteError, errorMessage: $errorMessage)';
 }
 
 
@@ -257,7 +275,7 @@ abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Re
   factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
 @override @useResult
 $Res call({
- String userName, HomeStatus status, List<DoctorModel> doctors, bool hasNextPage, bool isLoadingMore, String? errorMessage
+ String userName, String languageCode, HomeStatus status, List<DoctorModel> doctors, bool hasNextPage, bool isLoadingMore, bool isFavorite, Set<String> favoriteDoctorIds, String? favoriteError, String? errorMessage
 });
 
 
@@ -274,14 +292,18 @@ class __$HomeStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userName = null,Object? status = null,Object? doctors = null,Object? hasNextPage = null,Object? isLoadingMore = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userName = null,Object? languageCode = null,Object? status = null,Object? doctors = null,Object? hasNextPage = null,Object? isLoadingMore = null,Object? isFavorite = null,Object? favoriteDoctorIds = null,Object? favoriteError = freezed,Object? errorMessage = freezed,}) {
   return _then(_HomeState(
 userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as String,languageCode: null == languageCode ? _self.languageCode : languageCode // ignore: cast_nullable_to_non_nullable
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as HomeStatus,doctors: null == doctors ? _self._doctors : doctors // ignore: cast_nullable_to_non_nullable
 as List<DoctorModel>,hasNextPage: null == hasNextPage ? _self.hasNextPage : hasNextPage // ignore: cast_nullable_to_non_nullable
 as bool,isLoadingMore: null == isLoadingMore ? _self.isLoadingMore : isLoadingMore // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as bool,isFavorite: null == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
+as bool,favoriteDoctorIds: null == favoriteDoctorIds ? _self._favoriteDoctorIds : favoriteDoctorIds // ignore: cast_nullable_to_non_nullable
+as Set<String>,favoriteError: freezed == favoriteError ? _self.favoriteError : favoriteError // ignore: cast_nullable_to_non_nullable
+as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

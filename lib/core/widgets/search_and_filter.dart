@@ -34,7 +34,7 @@ class SearchAndFilter extends StatelessWidget {
                 ),
               ),
               hintStyle: AppTextStyle.font14LightGrey400,
-              hintText: loc(context)!.findtherightdoctorforyou,
+              hintText: loc(context)!.findTheRightDoctorForYou,
               // : InputBorder.none,
             ),
           ),

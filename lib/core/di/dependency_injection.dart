@@ -1,8 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:medigo/features/appointment/logic/appointment_cubit.dart';
+import 'package:medigo/features/favorites/logic/favorite_cubit.dart';
 import '../../features/appointment/data/repo/appointment_repository.dart';
 import '../../features/home/data/repo/doctor_repository.dart';
+import '../../features/home/data/repo/favorite_toggle_repository.dart';
 import '../../features/home/data/repo/new_appointment_repository.dart';
+import '../../features/favorites/data/repo/favorite_repository.dart';
 import '../../features/search/logic/search_cubit.dart';
 import '../network/auth/supabase_auth_services.dart';
 import '../../features/auth/login/data/repo/login_repo.dart';
@@ -57,5 +60,12 @@ Future<void> setupGetit() async {
 getIt.registerLazySingleton<AppointmentRepository>(
   () => AppointmentRepositoryImpl(Supabase.instance.client),
 );
+getIt.registerLazySingleton<FavoriteToggleRepository>(
+  () => FavoriteToggleRepository(getIt<SupabaseService>()),
+);
+getIt.registerLazySingleton<FavoriteDoctorsRepository>(
+  () => FavoriteDoctorsRepository(getIt<SupabaseService>()),
+);
+  getIt.registerFactory<FavoriteCubit>(() => FavoriteCubit(getIt<FavoriteDoctorsRepository>()));
   getIt.registerFactory<AppointmentCubit>(() => AppointmentCubit(getIt<AppointmentRepository>()));
 }

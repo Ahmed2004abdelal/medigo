@@ -87,7 +87,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       verticalSpace(30),
                       CustomTextFormField(
                         outLable: AppLocalizations.of(context)!.fullName,
-                        hintText: 'User',
+                        hintText: AppLocalizations.of(context)!.userEmail,
                         controller: nameController,
                         keyboardType: TextInputType.name,
                         focusNode: nameFocusNode,

@@ -53,7 +53,7 @@ class PatientDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomAppbarDetails(
-                        title: 'Patient\'s Details',
+                        title: 'Patient\'s Details', //!Text
                         onTap: () {
                           context.pop();
                         },
@@ -64,12 +64,12 @@ class PatientDetailsScreen extends StatelessWidget {
                         controller: _fullNameController,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return 'Please enter patient full name';
+                            return 'Please enter patient full name'; //!text
                           }
                           return null;
                         },
-                        outLable: 'Full Name',
-                        hintText: 'User',
+                        outLable: 'Full Name', //!text
+                        hintText: 'User', //!text
                         keyboardType: TextInputType.name,
                         onchanged: (val) {
                           val.isNotEmpty ? cubit.setFullName(val) : null;
@@ -80,12 +80,12 @@ class PatientDetailsScreen extends StatelessWidget {
                         controller: _emailController,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return 'Please enter patient email';
+                            return 'Please enter patient email'; //!text
                           }
                           return null;
                         },
-                        outLable: 'Email',
-                        hintText: 'user@mail.com',
+                        outLable: 'Email', //!text
+                        hintText: 'user@mail.com', //!text
                         keyboardType: TextInputType.emailAddress,
                         onchanged: (val) {
                           val.isNotEmpty ? cubit.setEmail(val) : null;
@@ -96,11 +96,11 @@ class PatientDetailsScreen extends StatelessWidget {
                         controller: _phoneController,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return 'Please enter patient phone number';
+                            return 'Please enter patient phone number';//!text
                           }
                           return null;
                         },
-                        outLable: 'Phone number',
+                        outLable: 'Phone number',//!text
                         hintText: '+20 000 000 0000',
                         keyboardType: TextInputType.phone,
                         onchanged: (val) {
@@ -109,8 +109,8 @@ class PatientDetailsScreen extends StatelessWidget {
                       ),
                       verticalSpace(25),
                       CustomDropdownFormField<Gender>(
-                        outLable: 'Gender',
-                        hintText: "Choose patient's gender",
+                        outLable: 'Gender',//!text
+                        hintText: "Choose patient's gender",//!text
                         hinttextStyle: AppTextStyle.font14LightGrey400,
                         items: Gender.values,
                         itemLabel: (gender) =>
@@ -120,19 +120,19 @@ class PatientDetailsScreen extends StatelessWidget {
                         onChanged: (val) =>
                             val != null ? cubit.setSelectedGender(val) : null,
                         validator: (value) =>
-                            value == null ? 'Please select gender' : null,
+                            value == null ? 'Please select gender' : null,//!text
                       ),
                       verticalSpace(25),
                       CustomTextFormField(
                         controller: _ageController,
                         validator: (val) {
                           if (val == null || val.isEmpty) {
-                            return 'Please enter patient age';
+                            return 'Please enter patient age';//!text
                           }
                           return null;
                         },
-                        outLable: 'Age',
-                        hintText: 'Patient age',
+                        outLable: 'Age',//!text
+                        hintText: 'Patient age',//!text
                         keyboardType: TextInputType.number,
                         onchanged: (val) {
                           val.isNotEmpty ? cubit.setAge(val) : null;
@@ -147,8 +147,8 @@ class PatientDetailsScreen extends StatelessWidget {
                         //   }
                         //   return null;
                         // },
-                        outLable: 'Detail',
-                        hintText: 'Patient details',
+                        outLable: 'Detail',//!text
+                        hintText: 'Patient details',//!text
                         height: 152.h,
                         minLines: 5,
                         keyboardType: TextInputType.multiline,
@@ -274,9 +274,6 @@ class ButtonBlocBuilder extends StatelessWidget {
             arguments: context.read<NewAppointmentCubit>(),
           );
         } else if (state.submissionStatus == SubmissionStatus.failure) {
-          debugPrint('------------------------------------------------');
-          debugPrint('BOOKING FAILED: ${state.submissionErrorMessage}');
-          debugPrint('------------------------------------------------');
           showDialog(
             context: context,
             builder: (_) => Dialog(
@@ -287,11 +284,11 @@ class ButtonBlocBuilder extends StatelessWidget {
                   children: [
                     const Icon(Icons.error, color: Colors.red),
                     verticalSpace(16),
-                    const Text('Failed to book appointment.'),
+                    const Text('Failed to book appointment.'),//!text
                     verticalSpace(16),
                     ElevatedButton(
                       onPressed: () => context.pop(),
-                      child: const Text('OK'),
+                      child: const Text('OK'),//!text
                     ),
                   ],
                 ),
@@ -304,7 +301,7 @@ class ButtonBlocBuilder extends StatelessWidget {
         final isLoading = state.submissionStatus == SubmissionStatus.loading;
 
         return CustomFloatingActionButton(
-          title: isLoading ? null : 'Book Appointment',
+          title: isLoading ? null : 'Book Appointment',//!text
           onPressed: isLoading ? null : () => _submit(context),
           child: isLoading
               ? const CircularProgressIndicator(color: Colors.white)

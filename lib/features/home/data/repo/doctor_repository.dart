@@ -34,8 +34,7 @@ class DoctorRepository {
   Future<Either<Failure, User?>> getUserName() async {
     Either<Failure, User> result = _authServices.getCurrentUser() != null
         ? Right(_authServices.getCurrentUser()!)
-        : Left(AuthFailure('No user logged in'));
-
+        : Left(AuthFailure('No user logged in'));//!text
     return result;
   }
 
@@ -43,7 +42,7 @@ class DoctorRepository {
     try {
       final userId = _authServices.getCurrentUser()?.id;
       if (userId == null) {
-        return Left(ServerFailure('User not logged in'));
+        return Left(ServerFailure('User not logged in'));//!text
       }
 
       await _service.insertData(
@@ -61,7 +60,7 @@ class DoctorRepository {
     try {
       final userId = _authServices.getCurrentUser()?.id;
       if (userId == null) {
-        return Left(ServerFailure('User not logged in'));
+        return Left(ServerFailure('User not logged in')); //!text
       }
 
       await _service.deleteData(
@@ -75,32 +74,21 @@ class DoctorRepository {
     }
   }
 
-  Stream<bool> isFavoriteStream(String doctorId) {
-    final userId = _authServices.getCurrentUser()?.id;
+//   Stream<bool> isFavoriteStream(String doctorId) {
+//     final userId = _authServices.getCurrentUser()?.id;
 
-    if (userId == null) return Stream.value(false);
+//     if (userId == null) return Stream.value(false);
 
-    return _service
-        .streamData(
-          table: Paths.favorite,
-          primaryKey: ['id'],
-          filterColumn: 'user_id',
-          filterValue: userId,
-        )
-        .map((rows) => rows.any((row) => row['doctor_id'] == doctorId));
-  }
+//     return _service
+//         .streamData(
+//           table: Paths.favorite,
+//           primaryKey: ['id'],
+//           filterColumn: 'user_id',
+//           filterValue: userId,
+//         )
+//         .map((rows) => rows.any((row) => row['doctor_id'] == doctorId));
+//   }
 }
 
 
 
-
-// .fold(
-//     (failure) {
-//       // print('Error fetching user: ${failure.message}');
-//       return failure.message; 
-//     },
-//     (user) {
-//       final name = user.userMetadata?['fullName'] as String?;
-//       return name;
-//     },
-//   );

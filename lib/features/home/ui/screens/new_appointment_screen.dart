@@ -39,7 +39,7 @@ class NewAppointmentScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomAppbarDetails(
-                      title: 'New Appointment',
+                      title: 'New Appointment',//!text
                       suffix: false,
                     ),
                     verticalSpace(34),
@@ -51,7 +51,7 @@ class NewAppointmentScreen extends StatelessWidget {
                     ),
                     verticalSpace(25),
                     Text(
-                      'Consultation Type',
+                      'Consultation Type',//!text
                       style: AppTextStyle.font14Black600,
                     ),
                     verticalSpace(20),
@@ -116,7 +116,7 @@ class NewAppointmentScreen extends StatelessWidget {
                       ),
                     ),
                     verticalSpace(15),
-                    Text('Available Slots', style: AppTextStyle.font14Black600),
+                    Text('Available Slots', style: AppTextStyle.font14Black600),//!text
                     verticalSpace(20),
                     Row(
                       spacing: 13.w,
@@ -175,7 +175,7 @@ class NewAppointmentScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Available Time',
+                            'Available Time',//!text
                             style: AppTextStyle.font14Black600,
                           ),
                           verticalSpace(20),
@@ -261,7 +261,7 @@ class NewAppointmentScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Consultation Fees',
+                                'Consultation Fees',//!text
                                 style: AppTextStyle.font14Black600,
                               ),
                               verticalSpace(20),
@@ -360,28 +360,28 @@ class _DateSelectorState extends State<DateSelector> {
   late List<DateTime> monthDates;
 
   static const List<String> _weekdayLabels = [
-    'MON',
-    'TUE',
-    'WED',
-    'THUR',
-    'FRI',
-    'SAT',
-    'SUN',
+    'MON',//!text
+    'TUE',//!text
+    'WED',//!text
+    'THUR',//!text
+    'FRI',//!text
+    'SAT',//!text
+    'SUN',//!text
   ];
 
   static const List<String> _monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
+    'January',//!text
+    'February',//!text
+    'March',//!text
+    'April',//!text
+    'May',//!text
+    'June',//!text
+    'July',//!text
+    'August',//!text
+    'September',//!text
+    'October',//!text
+    'November',//!text
+    'December',//!text
   ];
 
   final ScrollController _scrollController = ScrollController();
@@ -552,13 +552,13 @@ class ButtonBlocBuilder extends StatelessWidget {
 
         return CustomFloatingActionButton(
           onPressed: () {
-            debugPrint('Selected Date: ${state.appointmentDate}');
+            debugPrint('Selected Date: ${state.appointmentDate}');//!text
             context.pushNamed(
               Routes.patientDetailsScreen,
               arguments: context.read<NewAppointmentCubit>(),
             );
           },
-          title: 'Next',
+          title: 'Next',//!text
         );
       },
     );

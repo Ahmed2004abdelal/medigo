@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:medigo/core/routing/routes.dart';
 import '../../../../core/helpers/extension.dart';
-import '../../../../core/helpers/spacing.dart';
+import '../../../../core/helpers/specialization.dart';
 import '../../../../core/theming/app_colors.dart';
 import '../../../../core/theming/app_text_style.dart';
 import '../../data/models/speciality_model.dart';
@@ -23,9 +24,9 @@ class SpecialtiesList extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               context.pushNamed(
-                '/search',
+                Routes.search,
                 arguments: {
-                  'title': item.title,
+                  'title': item.titleKey,
                   'specializationLogo': item.image,
                 },
               );
@@ -43,11 +44,11 @@ class SpecialtiesList extends StatelessWidget {
                   ),
                   child: SvgPicture.asset(item.image),
                 ),
-                verticalSpace(5),
+                // verticalSpace(5),
                 SizedBox(
                   width: 59.w,
                   child: Text(
-                    item.title,
+                    getLocalizedSpecialityTitle(context, item.titleKey),
                     style: AppTextStyle.font10Grey1400,
                     maxLines: 2,
                     textAlign: TextAlign.center,
