@@ -29,7 +29,7 @@ class NavigationButtons extends StatelessWidget {
         isFirst
             ? SizedBox.shrink()
             : CustomButton(
-                text: 'Previous',
+                text: 'Previous',//!text
                 textStyle: AppTextStyle.font16BritnessBlue600,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.r),
@@ -43,7 +43,7 @@ class NavigationButtons extends StatelessWidget {
               ),
         isFirst ? SizedBox.shrink() : horizontalSpace(16.w),
         CustomButton(
-          text: isLast ? 'Get Started' : 'Next',
+          text: isLast ? 'Get Started' : 'Next',//!text
           textStyle: AppTextStyle.font16White600,
           backgroundColor: AppColors.britnessBlue,
           size: Size(isFirst ? 331.w : 155.w, 40.h),

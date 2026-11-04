@@ -111,7 +111,6 @@ class NewAppointmentCubit extends Cubit<NewAppointmentState> {
 
     result.fold(
       (failure) {
-        debugPrint('BOOKING FAILED: ${failure.message}');
         emit(
           state.copyWith(
             submissionStatus: SubmissionStatus.failure,
@@ -120,11 +119,10 @@ class NewAppointmentCubit extends Cubit<NewAppointmentState> {
         );
       },
       (_) {
-        debugPrint('BOOKING SUCCESS');
         emit(
           state.copyWith(
             submissionStatus: SubmissionStatus.success,
-            submissionSuccessMessage: 'Appointment booked successfully',
+            submissionSuccessMessage: 'Appointment booked successfully',//!text
           ),
         );
       },

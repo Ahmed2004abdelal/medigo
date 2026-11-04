@@ -23,11 +23,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    // نبني الـ items هنا في كل build — عشان الـ pages تتعمل لها rebuild فعلي
+    final items = buildBottomNavigationItems();
+
     return Scaffold(
       backgroundColor: Colors.blue,
       body: IndexedStack(
         index: currentPage,
-        children: bottomNavigationItems.map((e) => e.page).toList(),
+        children: items.map((e) => e.page).toList(),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -35,7 +38,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             BoxShadow(color: Colors.grey[400]!, blurRadius: 5, spreadRadius: 2),
           ],
         ),
-        height: 60.h,
+        height: 76.h,
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
           currentIndex: currentPage,
@@ -43,64 +46,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
             currentPage = value;
           }),
           showSelectedLabels: false,
-          items: [
-            BottomNavigationBarItem(
+          items: List.generate(items.length, (index) {
+            return BottomNavigationBarItem(
               label: '',
               icon: SvgPicture.asset(
-                bottomNavigationItems[0].icon,
+                items[index].icon,
                 width: 18.w,
                 height: 18.h,
                 colorFilter: ColorFilter.mode(
-                  currentPage == 0
+                  currentPage == index
                       ? AppColors.britnessBlue
                       : AppColors.lighterBabyBlue,
                   BlendMode.srcIn,
                 ),
               ),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: SvgPicture.asset(
-                bottomNavigationItems[1].icon,
-                width: 18.w,
-                height: 18.h,
-                colorFilter: ColorFilter.mode(
-                  currentPage == 1
-                      ? AppColors.britnessBlue
-                      : AppColors.lighterBabyBlue,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: SvgPicture.asset(
-                bottomNavigationItems[2].icon,
-                width: 18.w,
-                height: 18.h,
-                colorFilter: ColorFilter.mode(
-                  currentPage == 2
-                      ? AppColors.britnessBlue
-                      : AppColors.lighterBabyBlue,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: '',
-              icon: SvgPicture.asset(
-                bottomNavigationItems[3].icon,
-                width: 18.w,
-                height: 18.h,
-                colorFilter: ColorFilter.mode(
-                  currentPage == 3
-                      ? AppColors.britnessBlue
-                      : AppColors.lighterBabyBlue,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ],
+            );
+          }),
         ),
       ),
     );

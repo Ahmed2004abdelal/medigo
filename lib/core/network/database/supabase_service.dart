@@ -21,14 +21,23 @@ abstract class SupabaseService {
 
   // ====================  READ  ====================
   // ==================== STREAM ==================== 
-Stream<List<Map<String, dynamic>>> streamData({
-  required String table,
-  required List<String> primaryKey,
-  String? filterColumn,
-  dynamic filterValue,
-  String? orderBy,
-  bool ascending = true,
-});
+// Stream<List<Map<String, dynamic>>> streamData({
+//   required String table,
+//   required List<String> primaryKey,
+//   String? filterColumn,
+//   dynamic filterValue,
+//   String? orderBy,
+//   bool ascending = true,
+// });
+
+  // ==================== READ WITH JOIN ====================
+  Future<List<Map<String, dynamic>>> fetchDataWithJoin({
+    required String table,
+    required String select, // مثال: 'doctor_id, doctors(*)'
+    Map<String, dynamic>? filters,
+    String? orderBy,
+    bool ascending = true,
+  });
 
   // ==================== CREATE ====================
 
@@ -121,28 +130,55 @@ Stream<List<Map<String, dynamic>>> streamData({
     return response;
   }
 
+// @override
+// Stream<List<Map<String, dynamic>>> streamData({
+//   required String table,
+//   required List<String> primaryKey,
+//   String? filterColumn,
+//   dynamic filterValue,
+//   String? orderBy,
+//   bool ascending = true,
+// }) {
+//   final stream = _client.from(table).stream(primaryKey: primaryKey);
+
+//   if (filterColumn != null && filterValue != null) {
+//     final filtered = stream.eq(filterColumn, filterValue);
+//     return orderBy != null
+//         ? filtered.order(orderBy, ascending: ascending)
+//         : filtered;
+//   }
+
+//   return orderBy != null
+//       ? stream.order(orderBy, ascending: ascending)
+//       : stream;
+// }
+
 @override
-Stream<List<Map<String, dynamic>>> streamData({
+Future<List<Map<String, dynamic>>> fetchDataWithJoin({
   required String table,
-  required List<String> primaryKey,
-  String? filterColumn,
-  dynamic filterValue,
+  required String select,
+  Map<String, dynamic>? filters,
   String? orderBy,
   bool ascending = true,
-}) {
-  final stream = _client.from(table).stream(primaryKey: primaryKey);
+}) async {
+  var query = _client.from(table).select(select);
 
-  if (filterColumn != null && filterValue != null) {
-    final filtered = stream.eq(filterColumn, filterValue);
-    return orderBy != null
-        ? filtered.order(orderBy, ascending: ascending)
-        : filtered;
+  if (filters != null) {
+    filters.forEach((key, value) {
+      query = query.eq(key, value);
+    });
   }
 
-  return orderBy != null
-      ? stream.order(orderBy, ascending: ascending)
-      : stream;
+  PostgrestTransformBuilder finalQuery = query;
+
+  if (orderBy != null) {
+    finalQuery = query.order(orderBy, ascending: ascending);
+  }
+
+  final response = await finalQuery;
+  return (response as List).cast<Map<String, dynamic>>();
 }
+
 
   // ==================== CREATE ====================
 

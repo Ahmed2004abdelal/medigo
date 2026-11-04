@@ -21,7 +21,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CustomFloatingActionButton(
-        title: 'See Appointments',
+        title: 'See Appointments',//!text
         onPressed: () {
           context.pushNamed(Routes.bottomNavigationBar, arguments: 2);
         },
@@ -63,7 +63,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Congratulations !',
+                    'Congratulations !',//!text
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
@@ -74,7 +74,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                   CustomRichText(
                     text1:
                         '${context.read<NewAppointmentCubit>().state.fullName[0].toUpperCase()}${context.read<NewAppointmentCubit>().state.fullName.substring(1)}',
-                    text2: ', your appointment with',
+                    text2: ', your appointment with',//!Text
                   ),
                   verticalSpace(6),
                   CustomRichText(
@@ -84,8 +84,8 @@ class AppointmentSuccessScreen extends StatelessWidget {
                             .state
                             .doctor
                             ?.name ??
-                        "Dr. Ayesha Rahman",
-                    text2: ' had been created.',
+                        "Dr. Ayesha Rahman",//!text
+                    text2: ' had been created.',//!text
                   ),
                   verticalSpace(17),
                   Divider(color: AppColors.lighterGrey, thickness: 1.h),
@@ -99,7 +99,7 @@ class AppointmentSuccessScreen extends StatelessWidget {
                             ?.toIso8601String()
                             .split('T')
                             .first ??
-                        'dd/mm/yyyy',
+                        'dd/mm/yyyy',//!text
                     image: Assets.imagesIconesDateIcon,
                   ),
                   verticalSpace(17),

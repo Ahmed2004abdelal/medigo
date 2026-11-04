@@ -60,7 +60,9 @@ class Assets {
 
   static const String imagesIconesHospital2 = "assets/images/icones/hospital2.svg";
 
-  static const String imagesIconesMale = "assets/images/icones/male.png";
+  // static const String imagesIconesMalepng = "assets/images/icones/malepng.png";
+
+  static const String imagesIconesMalesvg = "assets/images/icones/malesvg.svg";
 
   static const String imagesIconesMessaging = "assets/images/icones/messaging.svg";
 
@@ -87,6 +89,8 @@ class Assets {
   static const String imagesIconesUsers = "assets/images/icones/users.svg";
 
   static const String imagesIconesVideoCall = "assets/images/icones/video_call.svg";
+
+  static const String imagesLogoIconLauncher = "assets/images/logo/icon_launcher.png";
 
   static const String imagesLogoLogoImage = "assets/images/logo/logo_image.svg";
 
